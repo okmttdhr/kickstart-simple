@@ -13,11 +13,19 @@ export default class TodoMain extends Component {
     hideCompleted: false
   }
 
+  // Meteor とつながれる
   getMeteorData() {
+
+    // Without the autopublish package,
+    // we will have to specify explicitly
+    // what the server sends to the client.
+    // The functions in Meteor that do this
+    // are `Meteor.publish` and `Meteor.subscribe`.
     Meteor.subscribe('tasks');
 
     let taskFilter = {};
 
+    // 完了したタスクを隠すか否かをリアクティブに監視できる
     if (this.state.hideCompleted) {
       taskFilter.checked = {$ne: true};
     }
@@ -28,7 +36,10 @@ export default class TodoMain extends Component {
     return {
       tasks,
       incompleteCount,
+
+      // user もとれるのか
       user: Meteor.user()
+
     };
   }
 
