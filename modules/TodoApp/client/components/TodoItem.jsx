@@ -5,16 +5,16 @@ export default class TodoItem extends Component {
     task: PropTypes.object.isRequired
   }
 
-  handleChecked(e) {
+  setChecked(e) {
     // Set the checked property to the opposite of its current value
     Meteor.call('setChecked', this.props.task._id, e.target.checked);
   }
 
-  handleDelete() {
+  deleteTask() {
     Meteor.call('deleteTask', this.props.task._id);
   }
 
-  handleSetPrivate() {
+  setPrivate() {
     Meteor.call('setPrivate', this.props.task._id, !this.props.task.private);
   }
 
@@ -24,8 +24,7 @@ export default class TodoItem extends Component {
     }
 
     return (
-      <button className="toggle-private" onClick={this.handleSetPrivate.bind(this)}>
-        {this.props.task.private ? 'Private' : 'Public'}
+      <button className="toggle-private" onClick={::this.setPrivate}>
       </button>
     );
   }
@@ -45,6 +44,14 @@ export default class TodoItem extends Component {
       <li className={itemClass}>
         <button className="delete" onClick={this.handleDelete.bind(this)}>&times;</button>
         <input type="checkbox" checked={this.props.task.checked} onChange={this.handleChecked.bind(this)} className="toggle-checked" />
+        <button
+          className="delete"
+          onClick={::this.deleteTask}>&times;</button>
+        <input
+          type="checkbox"
+          checked={this.props.task.checked}
+          onChange={::this.setChecked}
+          className="toggle-checked" />
         {this.renderTogglePrivate()}
         <span className="text"><strong>{this.props.task.username}</strong> - {this.props.task.text}</span>
       </li>
