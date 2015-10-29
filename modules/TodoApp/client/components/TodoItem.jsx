@@ -1,4 +1,5 @@
 import { Component, PropTypes } from 'react';
+import classNames from 'classnames'
 
 export default class TodoItem extends Component {
   static propTypes = {
@@ -29,20 +30,11 @@ export default class TodoItem extends Component {
   }
 
   render() {
-    let itemClass = '';
-
-    if (this.props.task.checked) {
-      itemClass += 'checked';
-    }
-
-    if (this.props.task.private) {
-      itemClass += ' private';
-    }
-
     return (
-      <li className={itemClass}>
-        <button className="delete" onClick={this.handleDelete.bind(this)}>&times;</button>
-        <input type="checkbox" checked={this.props.task.checked} onChange={this.handleChecked.bind(this)} className="toggle-checked" />
+      <li className={classNames({
+        'checked': this.props.task.checked,
+        'private': this.props.task.private,
+      })}>
         <button
           className="delete"
           onClick={::this.deleteTask}>&times;</button>
