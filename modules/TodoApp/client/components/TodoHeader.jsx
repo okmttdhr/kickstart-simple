@@ -14,7 +14,7 @@ export default class TodoHeader extends Component {
     event.preventDefault();
 
     // Get value from form element
-    var text = event.target.text.value;
+    const text = event.target.text.value;
 
     // Insert a task into the collection
     Meteor.call('addTask', text);
@@ -42,7 +42,10 @@ export default class TodoHeader extends Component {
         </h1>
 
         <label className="hide-completed">
-          <input type="checkbox" checked={this.props.hideCompleted} onChange={this.props.toggleHideCompleted} />
+          <input
+            type="checkbox"
+            checked={this.props.hideCompleted}
+            onChange={this.props.toggleHideCompleted} />
           Hide Completed Tasks
         </label>
 

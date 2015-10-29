@@ -19,9 +19,8 @@ export default class TodoItem extends Component {
   }
 
   renderTogglePrivate() {
-    if (Meteor.userId() !== this.props.task.owner) {
-      return null;
-    }
+    const isTaskOwner = Meteor.userId() !== this.props.task.owner;
+    if (isTaskOwner) return null;
 
     return (
       <button className="toggle-private" onClick={::this.setPrivate}>
@@ -53,7 +52,9 @@ export default class TodoItem extends Component {
           onChange={::this.setChecked}
           className="toggle-checked" />
         {this.renderTogglePrivate()}
-        <span className="text"><strong>{this.props.task.username}</strong> - {this.props.task.text}</span>
+        <span className="text">
+          <strong>{this.props.task.text}</strong> - by {this.props.task.username}
+        </span>
       </li>
     );
   }
