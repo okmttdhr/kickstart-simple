@@ -43,7 +43,7 @@ export default class TodoMain extends Component {
     };
   }
 
-  handleToggleHideCompleted = (e) => {
+  _toggleHideCompleted = (e) => {
     this.setState({ hideCompleted: e.target.checked });
   }
 
@@ -54,14 +54,13 @@ export default class TodoMain extends Component {
     }
 
     return (
-        <div className="container">
-          <TodoHeader
-              incompleteCount={this.data.incompleteCount}
-              hideCompleted={this.state.hideCompleted}
-              toggleHideCompleted={this.handleToggleHideCompleted}
-          />
-          <TodoList tasks={this.data.tasks} />
-        </div>
+      <div className="container">
+        <TodoHeader
+          incompleteCount={this.data.incompleteCount}
+          hideCompleted={this.state.hideCompleted}
+          toggleHideCompleted={this._toggleHideCompleted} />
+        <TodoList tasks={this.data.tasks} />
+      </div>
     );
   }
 };

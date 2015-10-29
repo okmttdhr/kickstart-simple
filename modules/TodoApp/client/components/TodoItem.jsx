@@ -25,6 +25,7 @@ export default class TodoItem extends Component {
 
     return (
       <button className="toggle-private" onClick={::this.setPrivate}>
+        {this.props.task.private ? 'Make this Public' : 'Make this Private'}
       </button>
     );
   }

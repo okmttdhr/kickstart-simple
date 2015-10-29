@@ -28,7 +28,7 @@ export default class TodoHeader extends Component {
 
     if (Meteor.userId()) {
       form = (
-        <form className="new-task" onSubmit={this.handleSubmit.bind(this)}>
+        <form className="new-task" onSubmit={::this.handleSubmit}>
           <input type="text" name="text" placeholder="Type to add new tasks" />
         </form>
       );
